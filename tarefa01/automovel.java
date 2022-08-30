@@ -10,9 +10,10 @@ public class automovel{
     private int quantPassageiros;
     private int currentPassengers;
     private double litrosGasolina;
+    private double maxGasolina;
     private double velocidade;
 
-    public automovel(boolean b, double comprimento, double altura, double peso, double cargaMaxima, int quantPassageiros, int currentPassangers, double litrosGasolina, double velocidade){
+    public automovel(boolean b, double comprimento, double altura, double peso, double cargaMaxima, int quantPassageiros, int currentPassangers, double litrosGasolina, double maxGasolina, double velocidade){
         this.isOn = b;
         this.comprimento = comprimento;        
         this.altura = altura;        
@@ -20,7 +21,8 @@ public class automovel{
         this.cargaMaxima = cargaMaxima;        
         this.quantPassageiros = quantPassageiros;        
         this.currentPassengers = currentPassangers;        
-        this.litrosGasolina = litrosGasolina;        
+        this.litrosGasolina = litrosGasolina;
+        this.maxGasolina = maxGasolina;        
         this.velocidade = velocidade;        
     }
 
@@ -50,6 +52,10 @@ public class automovel{
 
     public double getLitrosGasolina(){
         return litrosGasolina;
+    }
+
+    public double getMaxGasolina(){
+        return maxGasolina;
     }
 
     public double getVelocidade(){
@@ -92,8 +98,41 @@ public class automovel{
         }
     }
 
-    public double abastecer(){
-        
+    public double abastecer(double gasolina){
+        double totalGasolina = getLitrosGasolina() + gasolina;
+        if(totalGasolina > getMaxGasolina()){
+            alertGasolina();
+        }
+        else{ //Incrementar junção com peso atual do carro
+
+        }
+
+        return getLitrosGasolina() + gasolina;
+    }
+
+    public void alertGasolina(){
+        System.out.println("A quantidade de gasolina excedeu o máximo permitido");
+    }
+
+    public int embarque(int quantPessoas){
+        int totalPassageiros = getCurrentPassengers() + quantPessoas;
+        if(totalPassageiros > getQuantPassageiros()){
+            return totalPassageiros;
+        }
+        else{
+            currentPassengers = totalPassageiros;
+        }
+        return totalPassageiros;
+    }
+
+    public double reabastecer(){
+
+        if(getLitrosGasolina() < getMaxGasolina()/4){
+            //Finalizar função para checagem
+            //Provavelmente string ()?
+        }
+
+        return 0;
     }
 
 }
