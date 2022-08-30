@@ -2,11 +2,12 @@ package tarefa01;
 
 public class teste{
     public static void main(String[] args) {
-        automovel carro = new automovel(true, 0, 0, 0, 0, 0, 0, 0, 100, 0);
+        automovel carro = new automovel(true, 0, 0, 0, 0, 10, 5, 80, 100, 0);
 
-        System.out.println(carro.getVelocidade());
-        System.out.println(carro.acelera(20));
-        System.out.println(carro.getVelocidade());
+        carro.ligar();
+        carro.desligar();
+        carro.embarque(5);
+        
         
     }
 }
