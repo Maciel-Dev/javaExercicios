@@ -1,26 +1,26 @@
 package tarefa01;
 
-public class automovel{
+public class Automovel{
 
     private boolean isOn;
     private double comprimento;
     private double altura;
     private double peso;
     private double cargaMaxima;
+    private int maxPassageiros;
     private int quantPassageiros;
-    private int currentPassengers;
     private double litrosGasolina;
     private double maxGasolina;
     private double velocidade;
 
-    public automovel(boolean isOn, double comprimento, double altura, double peso, double cargaMaxima, int quantPassageiros, int currentPassangers, double litrosGasolina, double maxGasolina, double velocidade){
+    public Automovel(boolean isOn, double comprimento, double altura, double peso, double cargaMaxima, int maxPassageiros, int quantPassageiros, double litrosGasolina, double maxGasolina, double velocidade){
         this.isOn = isOn;
         this.comprimento = comprimento;        
         this.altura = altura;        
         this.peso = peso;        
         this.cargaMaxima = cargaMaxima;        
+        this.maxPassageiros = maxPassageiros;        
         this.quantPassageiros = quantPassageiros;        
-        this.currentPassengers = currentPassangers;        
         this.litrosGasolina = litrosGasolina;
         this.maxGasolina = maxGasolina;        
         this.velocidade = velocidade;        
@@ -42,12 +42,12 @@ public class automovel{
         return cargaMaxima;
     }
 
-    public int getQuantPassageiros(){
-        return quantPassageiros;
+    public int getMaxPassageiros(){
+        return maxPassageiros;
     }
 
-    public int getCurrentPassengers(){
-        return currentPassengers;
+    public int getQuantPassageiros(){
+        return quantPassageiros;
     }
 
     public double getLitrosGasolina(){
@@ -70,6 +70,14 @@ public class automovel{
         if(getIsOn() == false){
             isOn = true;
             System.out.println("Ligando o carro!");
+            System.out.println("Carro ligado!");
+            if(getLitrosGasolina() <= getMaxGasolina()/4){
+                System.out.println("Necessário Reabastecer");
+            }
+            else{
+                System.out.println("Não é necessário reabastecer");
+            }
+
         }
         else{
             System.out.println("O carro já está ligado!");
@@ -96,89 +104,114 @@ public class automovel{
         return isOn;
     }
 
-    public String acelera(double velocidadeNova){
+    public double acelera(double velocidadeNova){
         
         if(getIsOn() == true){
 
             if(getVelocidade() < velocidadeNova){
-                velocidade = velocidadeNova;
-                return "Acelerou";
+                System.out.println("O carro está acelerando!");
+                String alertAcelera = String.format("O carro acelerou %.2f km/h", velocidadeNova-getVelocidade());
+                System.out.println(alertAcelera);
             }
             else{
-                velocidade = velocidadeNova;
-                return "Freiou";
+                String alertAcelera = String.format("O carro desacelerou %.2f km/h", getVelocidade()-velocidadeNova);
+                System.out.println(alertAcelera);
             }
-
+            
+            velocidade = velocidadeNova;
+            return velocidade;
         }
         else{
-            return "Carro desligado";
+            System.out.print("O carro está desligado!");
+            return velocidade = 0;
         }
+
     }
 
     public double pesoAtualCarro(){
-        return getLitrosGasolina()+(getQuantPassageiros()*80);
-    }
-
-    public String alertaPesoMaximo(){
-        if(pesoAtualCarro() > getCargaMaxima()){
-            return "Carro está acima da capacidade suportada de peso!";
+        peso = getLitrosGasolina() + (getQuantPassageiros() * 80);
+        if(peso > getCargaMaxima()){
+            String alertPeso = String.format("O carro está acima do limite de peso em %.2f kg", getPeso() - getCargaMaxima());
+            System.out.println(alertPeso);
         }
         else{
-            return "Carro está estável com seu peso abaixo do limite estabelecido!";
+            String alertPeso = String.format("O carro está abaixo do limite de peso em %.2f kg", getCargaMaxima() - getPeso());
+            System.out.println(alertPeso);
         }
+        return peso;
     }
 
     public double abastecer(double gasolina){
         double totalGasolina = getLitrosGasolina() + gasolina;
-        if(totalGasolina > getMaxGasolina()){
-            alertGasolina();
-            return getLitrosGasolina();
+        if(getIsOn() == false){
+            if(totalGasolina > getMaxGasolina()){
+                System.out.println("A quantidade de gasolina excedeu o máximo permitido"); 
+                return getLitrosGasolina();
+            }
+            else{
+                if(gasolina + getQuantPassageiros()*80 > getCargaMaxima()){
+                    System.out.println("Carga máxima excedida! Não foi possível abastecer!");
+                    return getLitrosGasolina();
+                }
+                else{
+                    gasolina = totalGasolina;
+                    String alertGasolina = String.format("Carro abastecido! Agora o carro possui %.2f litros de gasolina!", gasolina);
+                    System.out.println(alertGasolina);
+                    return getLitrosGasolina() + gasolina; 
+                }
+            }
         }
         else{
-            return getLitrosGasolina() + gasolina; 
+            System.out.println("O carro está ligado! Não foi possível abastecer!");
+            return getLitrosGasolina();
         }
     }
 
-    public void alertGasolina(){
-        System.out.println("A quantidade de gasolina excedeu o máximo permitido"); 
+    public int desembarque(int quantPessoas){
+
+        if(getVelocidade() == 0){
+            if(quantPessoas > getQuantPassageiros()){
+                System.out.println("A quantidade de passageiros para desembarque é maior do que a quantidade de passageiros no veículo!");
+                return quantPassageiros;
+            }
+            else{
+                quantPassageiros = getQuantPassageiros() - quantPessoas;
+                String alertDesembarque = String.format("%d passageiros desembarcaram! O veículo possui %d passageiros!", quantPessoas, quantPassageiros);
+                System.out.println(alertDesembarque);
+            }
+        }
+        else{
+            System.out.println("O carro está em movimento! Não é possível realizar o desembarque");
+        }
+
+        return quantPassageiros;
     }
 
     public int embarque(int quantPessoas){
-        int totalPassageiros = getCurrentPassengers() + quantPessoas;
+        int totalPassageiros = getQuantPassageiros() + quantPessoas;
 
-        if(getIsOn() == false){
-            if(totalPassageiros > getQuantPassageiros()){
+        if(getVelocidade() == 0){
+            if(totalPassageiros > getMaxPassageiros()){
                 String alertPassageiros = String.format("Não é possível acomodar %d passageiros no veículo", quantPessoas);
                 System.out.println(alertPassageiros);
-                return totalPassageiros;
             }
             else{
                 String alertPassageiros = String.format("%d passageiros embarcados no veículo! %d passageiros no veículo!", quantPessoas, totalPassageiros);
                 System.out.println(alertPassageiros);
-                currentPassengers = totalPassageiros;
-            }
-        }
-        return totalPassageiros;
-    }
-
-    public String reabastecer(){
-        if(getIsOn() == true){
-            if(getLitrosGasolina() <= getMaxGasolina()/4){
-                return "Necessário Reabastecer";
-            }
-            else{
-                return "Não é necessário reabastecer";
+                quantPassageiros = totalPassageiros;
             }
         }
         else{
-            return "O carro está desligado";
+            System.out.println("O carro encontra-se em movimento!");
         }
-
+        pesoAtualCarro();
+        return totalPassageiros;
     }
 
-    public String parar(){
+    public double parar(){
         velocidade = 0;
-        return "Carro está parado!";
+        System.out.println("Carro está parado!");
+        return velocidade;
     }
 
 }
