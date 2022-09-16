@@ -4,7 +4,6 @@ public abstract class Content {
     
     private String title;
     private int seconds;
-    private String type = "";
 
     public Content(String title, int seconds){
         this.title = title;
@@ -19,10 +18,6 @@ public abstract class Content {
         this.seconds = seconds;
     }
 
-    public void SetType(String type){
-        this.type = type;
-    }
-
     public String GetTitle(){
         return title;
     }
@@ -30,9 +25,4 @@ public abstract class Content {
     public int GetSecondsDuration(){
         return seconds;
     }
-
-    public String GetType(){
-        return type;
-    }
-
 }
