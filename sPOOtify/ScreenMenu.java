@@ -105,7 +105,7 @@ public class ScreenMenu {
                     System.out.println("Digite a resenha do Podcast: ");
                     String review = inputUser.nextLine();
 
-                    Podcast podcast = new Podcast(title, seconds, presenter, theme, review);
+                    Content podcast = new Podcast(title, seconds, presenter, theme, review);
 
                     playlist.SetContent(podcast);
 
@@ -156,7 +156,7 @@ public class ScreenMenu {
                     System.out.println("Digite a Sinpose do AudioLivro: ");
                     String synpose = inputUser.nextLine();
 
-                    AudioBook audioBook = new AudioBook(title, seconds, workTitle, authors, pubCompany, storyTeller, synpose);
+                    Content audioBook = new AudioBook(title, seconds, workTitle, authors, pubCompany, storyTeller, synpose);
 
                     playlist.SetContent(audioBook);
                     
