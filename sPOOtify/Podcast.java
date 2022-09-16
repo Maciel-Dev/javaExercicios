@@ -6,9 +6,9 @@ public class Podcast extends Content {
     private String theme;
     private String review;
 
-    public Podcast(String title, int seconds, String type, String presenter, String theme, String review){
+    public Podcast(String title, int seconds, String presenter, String theme, String review){
 
-        super(title, seconds, type);
+        super(title, seconds);
         this.presenter = presenter;
         this.theme = theme;
         this.review = review;

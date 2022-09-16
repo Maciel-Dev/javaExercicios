@@ -9,9 +9,9 @@ public class Music extends Content {
     private List<String> interpreter = new ArrayList<>();
     private String genre;
 
-    public Music(String title, int seconds, String type, List<String> composer, List<String> interpreter, String genre){
+    public Music(String title, int seconds, List<String> composer, List<String> interpreter, String genre){
         
-        super(title, seconds, type);
+        super(title, seconds);
         this.composers = composer;
         this.interpreter = interpreter;
         this.genre = genre;

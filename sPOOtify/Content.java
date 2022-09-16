@@ -6,10 +6,9 @@ public abstract class Content {
     private int seconds;
     private String type = "";
 
-    public Content(String title, int seconds, String type){
+    public Content(String title, int seconds){
         this.title = title;
         this.seconds = seconds;
-        this.type = type;
     }
 
     public void SetTitle(String title){

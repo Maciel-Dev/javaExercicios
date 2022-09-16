@@ -14,8 +14,8 @@ public class AudioBook extends Content {
     //Fazer uma forma de Set para autores
     //Adicionar na lista
 
-    public AudioBook(String title, int seconds, String type, String workTitle, List<String> authors, String pubCompany, String storyTeller, String synpose){
-        super(title, seconds, type);
+    public AudioBook(String title, int seconds, String workTitle, List<String> authors, String pubCompany, String storyTeller, String synpose){
+        super(title, seconds);
         this.workTitle = workTitle;
         this.authors = authors;
         this.pubCompany = pubCompany;
