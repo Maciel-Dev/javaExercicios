@@ -91,7 +91,6 @@ public class ScreenMenu {
 
                 else if(userAddContent.equalsIgnoreCase("P")){
 
-                    inputUser.nextLine();
                     System.out.println("Digite o título do Podcast: ");
                     String title = inputUser.nextLine();
                     System.out.println("Digite o tempo em segundos do Podcast: ");
@@ -119,16 +118,13 @@ public class ScreenMenu {
                     String title = inputUser.nextLine();
                     System.out.println("Digite o tempo em segundos do AudioLivro: ");
                     int seconds = inputUser.nextInt();
+                    inputUser.nextLine();
                     System.out.println("Digite o título da obra do Audiolivro: ");
                     String workTitle = inputUser.nextLine();
                     System.out.println("Digite o Autor da obra do Audiolivro: ");
                     authors.add(inputUser.nextLine());
-                    inputUser.nextLine();
 
-
-                    
-
-                    System.out.println("Deseja Adicionar mais Compositores? S - Sim / N - Não");
+                    System.out.println("Deseja Adicionar mais Autores? S - Sim / N - Não");
                     String moreAuthor = inputUser.nextLine();
 
                     while(!moreAuthor.equalsIgnoreCase("N")){
@@ -210,7 +206,7 @@ public class ScreenMenu {
             "3 - Listar Podcasts\n" +
             "4 - Listar AudioLivros\n" +
             "5 - Exibir Duração total da Playlist\n" +
-            "0 - Sair");
+            "0 - Sair\n");
             String newInput = inputUser.nextLine();
             input = newInput;
 
