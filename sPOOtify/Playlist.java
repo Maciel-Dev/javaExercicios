@@ -35,5 +35,6 @@ public class Playlist {
     public void SetContent(Content musica){
         content.add(musica);
     }
+    
 
 }

@@ -10,7 +10,7 @@ public class Main {
         screen.MenuStart();
 
         Scanner inputUser = new Scanner(System.in);
-        String input = inputUser.next();
+        String input = inputUser.nextLine();
 
 
         Playlist playlist = new Playlist("Teste");

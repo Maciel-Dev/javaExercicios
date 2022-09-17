@@ -30,8 +30,8 @@ public class Music extends Content {
         this.genre = genre;
     }
 
+
     public List<String> GetListComposer(){
-        System.out.println(this.composers);
         return this.composers;
     }
 
@@ -43,4 +43,17 @@ public class Music extends Content {
         return this.genre;
     }
 
-}
+    @Override
+    public void GetInfo(List<Content> playlist){
+            for(Content content : playlist){
+                if(content instanceof Music){
+                    String titulo = content.GetTitle();
+                    Integer duracao = content.GetSecondsDuration();
+                    System.out.println("############### Playlist #################################################################");
+                    System.out.println("# - Música: " + titulo + "      Duração: " + duracao + " segundos       " + "[Compositor: " + GetListComposer().toString().replace("[", "").replace("]", "") + "] [Interpretes: " + GetListInterpreter().toString().replace("[", "").replace("]", "") + "] [Gênero: " + GetGenre() + "]");
+                    System.out.println("##########################################################################################");
+                }
+            }
+        }
+
+    }

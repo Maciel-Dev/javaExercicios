@@ -1,5 +1,7 @@
 package sPOOtify;
 
+import java.util.List;
+
 public abstract class Content {
     
     private String title;
@@ -35,4 +37,6 @@ public abstract class Content {
         return type;
     }
 
+    public void GetInfo(List<Content> playlist){
+    }
 }

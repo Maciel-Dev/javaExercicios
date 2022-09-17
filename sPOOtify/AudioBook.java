@@ -62,4 +62,17 @@ public class AudioBook extends Content {
     public String GetSynpose(){
         return this.synpose;
     }
+
+    @Override
+    public void GetInfo(List<Content> playlist){
+        for(Content content : playlist){
+            if(content instanceof AudioBook){
+                String titulo = content.GetTitle();
+                Integer duracao = content.GetSecondsDuration();
+                System.out.println("############### Playlist #################################################################");
+                System.out.println("# - AudioBook: " + titulo + "      Duração: " + duracao + " segundos       " + "[Título da obra: " + GetWorkTitle() + "] [Autores: " + GetAuthors().toString().replace("[", "").replace("]", "") + "] [Editora: " + GetPubCompany() + "] [Narrador: " + GetStoryTeller() + "] [Sinopse: " + GetSynpose() + "]");
+                System.out.println("##########################################################################################");
+            }
+        }
+    }
 }

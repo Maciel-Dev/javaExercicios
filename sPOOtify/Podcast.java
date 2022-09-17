@@ -1,5 +1,7 @@
 package sPOOtify;
 
+import java.util.List;
+
 public class Podcast extends Content {
     
     private String presenter;
@@ -37,5 +39,18 @@ public class Podcast extends Content {
 
     public String GetReview(){
         return this.review;
+    }
+
+    @Override
+    public void GetInfo(List<Content> playlist){
+        for(Content content : playlist){
+            if(content instanceof Podcast){
+                String titulo = content.GetTitle();
+                Integer duracao = content.GetSecondsDuration();
+                System.out.println("############### Playlist #################################################################");
+                System.out.println("# - Podcast: " + titulo + "      Duração: " + duracao + " segundos       " + "[Apresentador: " + GetPresenter() + "] [Tema: " + GetTheme() + "] [Resenha: " + GetReview() + "]");
+                System.out.println("##########################################################################################");
+            }
+        }
     }
 }

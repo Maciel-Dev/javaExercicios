@@ -25,7 +25,7 @@ public class ScreenMenu {
             if(input.equals("1")){
                 
                 System.out.println("M - Adicionar Música\nP - Adicionar Podcast\nA - Adicionar AudioLivro\nF - Finalizar Criação");
-                String userAddContent = inputUser.next();
+                String userAddContent = inputUser.nextLine();
                 if(userAddContent.equalsIgnoreCase("M")){
 
                     //Listas Auxiliares
@@ -33,15 +33,13 @@ public class ScreenMenu {
                     List<String> ListInterpreters = new ArrayList<>();
 
                     System.out.println("Digite o título da Música: ");
-                    String title = inputUser.next();
+                    String title = inputUser.nextLine();
                     System.out.println("Digite o tempo da Música em segundos: ");
-                    inputUser.nextLine();
                     int seconds = inputUser.nextInt();
                     System.out.println("Digite o nome do Compositor da Música: ");
-                    String composer = inputUser.next();
                     inputUser.nextLine();
 
-                    ListComposers.add(composer);
+                    ListComposers.add(inputUser.nextLine());
 
                     System.out.println("Deseja Adicionar mais Compositores? S - Sim / N - Não");
                     String moreComp = inputUser.nextLine();
@@ -50,8 +48,7 @@ public class ScreenMenu {
                         if(moreComp.equalsIgnoreCase("S")){
 
                             System.out.println("Digite o nome do Compositor da Música: ");
-                            String newComposer = inputUser.nextLine();
-                            ListComposers.add(newComposer);
+                            ListComposers.add(inputUser.nextLine());
 
                         }
 
@@ -62,30 +59,32 @@ public class ScreenMenu {
                     }
 
                     System.out.println("Digite o Interprete da Música: ");
-                    String interpreter = inputUser.next();
-                    ListInterpreters.add(interpreter);
+
+                    ListInterpreters.add(inputUser.nextLine());
 
                     System.out.println("Deseja Adicionar mais Intérpretes? S - Sim / N - Não");
-                    String moreInterp = inputUser.next();
+                    String moreInterp = inputUser.nextLine();
                     while(!moreInterp.equalsIgnoreCase("N")){
                         if(moreInterp.equalsIgnoreCase("S")){
 
                             System.out.println("Digite o nome do Intérprete da Música: ");
-                            String newInterp = inputUser.next();
-                            ListInterpreters.add(newInterp);
+                            ListInterpreters.add(inputUser.nextLine());
 
                         }
 
                         System.out.println("Deseja Adicionar mais Intérpretes? S - Sim / N - Não");
-                        String newMoreInterp = inputUser.next();
+                        String newMoreInterp = inputUser.nextLine();
                         moreInterp = newMoreInterp;
 
                     }
 
                     System.out.println("Digite o Gênero da Música: ");
-                    String genre = inputUser.next();
+                    String genre = inputUser.nextLine();
 
-                    Content musica = new Music(title, seconds, ListComposers, ListInterpreters, genre);
+                    Music musica = new Music(title, seconds, ListComposers, ListInterpreters, genre);
+
+                    System.out.println(musica.GetListComposer());
+                    System.out.println(ListComposers);
                     
                     playlist.SetContent(musica);
                 }
@@ -105,7 +104,7 @@ public class ScreenMenu {
                     System.out.println("Digite a resenha do Podcast: ");
                     String review = inputUser.nextLine();
 
-                    Podcast podcast = new Podcast(title, seconds, presenter, theme, review);
+                    Content podcast = new Podcast(title, seconds, presenter, theme, review);
 
                     playlist.SetContent(podcast);
 
@@ -117,15 +116,13 @@ public class ScreenMenu {
                     List<String> authors = new ArrayList<>();
 
                     System.out.println("Digite o título do AudioLivro: ");
-                    String title = inputUser.next();
+                    String title = inputUser.nextLine();
                     System.out.println("Digite o tempo em segundos do AudioLivro: ");
-                    inputUser.nextLine();
                     int seconds = inputUser.nextInt();
                     System.out.println("Digite o título da obra do Audiolivro: ");
-                    String workTitle = inputUser.next();
+                    String workTitle = inputUser.nextLine();
                     System.out.println("Digite o Autor da obra do Audiolivro: ");
-                    String author = inputUser.next();
-                    authors.add(author);
+                    authors.add(inputUser.nextLine());
                     inputUser.nextLine();
 
 
@@ -138,8 +135,7 @@ public class ScreenMenu {
                         if(moreAuthor.equalsIgnoreCase("S")){
 
                             System.out.println("Digite o nome do Compositor da Música: ");
-                            String newAuthor = inputUser.nextLine();
-                            authors.add(newAuthor);
+                            authors.add(inputUser.nextLine());
 
                         }
 
@@ -156,7 +152,7 @@ public class ScreenMenu {
                     System.out.println("Digite a Sinpose do AudioLivro: ");
                     String synpose = inputUser.nextLine();
 
-                    AudioBook audioBook = new AudioBook(title, seconds, workTitle, authors, pubCompany, storyTeller, synpose);
+                    Content audioBook = new AudioBook(title, seconds, workTitle, authors, pubCompany, storyTeller, synpose);
 
                     playlist.SetContent(audioBook);
                     
@@ -173,7 +169,9 @@ public class ScreenMenu {
 
                 for(Content content : playlist.GetContent()){
                     if(content.getClass().getName().contains("Music")){
-                    System.out.println("Música: " + content.GetTitle() + "     Duração: " + content.GetSecondsDuration());
+                        if(content instanceof Music){
+                            content.GetInfo(playlist.GetContent());
+                    }
                 }
             }
         }
@@ -181,20 +179,23 @@ public class ScreenMenu {
             else if(input.equals("3")){
                 for(Content content : playlist.GetContent()){
                     if(content.getClass().getName().contains("Podcast")){
-                    System.out.println(content.GetTitle());
+                        if(content instanceof Podcast){
+                            content.GetInfo(playlist.GetContent());
+                    }
                 }
             }
-
         }
 
             else if(input.equals("4")){
                 for(Content content : playlist.GetContent()){
                     if(content.getClass().getName().contains("AudioBook")){
-                    System.out.println(content.GetTitle());
+                        if(content instanceof AudioBook){
+                            content.GetInfo(playlist.GetContent());
+                    }
                 }
             }
-
         }
+
 
             else if(input.equals("5")){
                 System.out.println(playlist.GetSeconds() + " segundos");
@@ -210,7 +211,7 @@ public class ScreenMenu {
             "4 - Listar AudioLivros\n" +
             "5 - Exibir Duração total da Playlist\n" +
             "0 - Sair");
-            String newInput = inputUser.next();
+            String newInput = inputUser.nextLine();
             input = newInput;
 
         }
